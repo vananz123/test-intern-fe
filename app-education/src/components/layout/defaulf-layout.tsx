@@ -9,10 +9,12 @@ function DefaulfLayout() {
       <Container className="py-2">
         <Header />
       </Container>
-      <div className="bg-green-100">
+      <div className="bg-gradient-to-br from-emerald-50 bg-green-100">
         <Container className="mb-4">
-            <Toaster/>
-          <Outlet />
+          <Toaster />
+          <div className="min-h-80">
+            <Outlet />
+          </div>
         </Container>
       </div>
       <Container className="py-2">

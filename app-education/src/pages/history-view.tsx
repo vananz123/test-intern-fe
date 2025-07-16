@@ -3,22 +3,19 @@ import useHistoryProduct from "@/hook/useHistoryProduct";
 
 function HistoryView() {
   const { products } = useHistoryProduct();
-  console.log(products);
   return (
-    <div>
-      {products.length >0 ? (
+    <div className="mt-4">
+      {products.length > 0 ? (
         <>
-          <div className="flex flex-row flex-wrap gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
             {products.length > 0 &&
-              products.map((i, index) => (
-                <BookCard key={index} data={i} />
-              ))}
+              products.map((i, index) => <BookCard key={index} data={i} />)}
           </div>
         </>
       ) : (
         <>
-          <div className="flex flex-row flex-wrap gap-4">
-            Chưa có lịch sử xem
+          <div className="flex w-full text-center justify-center">
+            <div className="font-semibold">Không có sản phẩm nào</div>
           </div>
         </>
       )}

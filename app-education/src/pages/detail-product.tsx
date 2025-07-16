@@ -37,7 +37,7 @@ function DetailProduct() {
     dispatch(addToCart(cart));
     dispatch(loadCart());
     toast("Sản phẩm đã thêm vào giỏ hàng", {
-      description: "Sunday, December 03, 2023 at 9:00 AM",
+      description: `${product?.title}`,
       action: {
         label: "X",
         onClick: () => console.log("Undo"),

@@ -9,7 +9,17 @@ import {
 import HeaderSearch from "@/components/_components/header-search";
 import SheetForMoblie from "@/components/_components/sheet-for-moble";
 import { Nav } from "@/components/_components/nav";
+import ShoppingCartItem from "@/components/_components/shopping-cart-item";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { selectCart } from "@/redux/features/cart/reducer";
+import { loadCart } from "@/redux/features/cart/action";
+import { useEffect } from "react";
 function Header() {
+  const dispatch = useAppDispatch();
+    const { cart } = useAppSelector(selectCart);
+    useEffect(() => {
+      dispatch(loadCart());
+    }, [dispatch]);
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -26,18 +36,20 @@ function Header() {
                 <CartIcon />
               </Link>
             </HoverCardTrigger>
-            <HoverCardContent className="w-80">
-              <div className="flex justify-between gap-4">
-                <div className="space-y-1">
-                  <h4 className="text-sm font-semibold">@nextjs</h4>
-                  <p className="text-sm">
-                    The React Framework – created and maintained by @vercel.
-                  </p>
-                  <div className="text-muted-foreground text-xs">
-                    Joined December 2021
-                  </div>
-                </div>
-              </div>
+            <HoverCardContent className="w-auto">
+              {cart.data && cart.data.length > 0 ? (
+              <>
+                {cart.data.map((i, index) => (
+                  <ShoppingCartItem key={index} data={i} />
+                ))}
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-center font-semibold">
+                  Không có sản phẩm nào trong giỏ hàng
+                </p>
+              </>
+            )}
             </HoverCardContent>
           </HoverCard>
           <div className="md:hidden"><SheetForMoblie/></div>

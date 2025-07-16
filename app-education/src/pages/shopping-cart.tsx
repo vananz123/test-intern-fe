@@ -7,11 +7,9 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { ChangeCurrence } from "@/utils/utils";
 import { useEffect } from "react";
 import { Link } from "react-router";
-
 function ShoppingCart() {
   const dispatch = useAppDispatch();
   const { cart } = useAppSelector(selectCart);
-  console.log(cart);
   useEffect(() => {
     dispatch(loadCart());
   }, [dispatch]);
@@ -33,7 +31,6 @@ function ShoppingCart() {
                 Mua thêm &gt;
               </Link>
             </div>
-
             {/* Sản phẩm */}
             {cart.data && cart.data.length > 0 ? (
               <>
