@@ -13,17 +13,18 @@ const loadCartReducer = createReducer(defaultProductReducer, (builder: any) => {
   builder
     .addCase(loadCart, (state: CartType) => {
       const localStorageCart = localStorage.getItem("cart");
-      if (localStorageCart === undefined) {
+      if (localStorageCart === null) {
         state.data = [];
+      }else{
+        const dataParse = JSON.parse(localStorageCart as string) as CartItem[] ;
+        state.data = dataParse;
+        state.itemCount = dataParse.length;
+        let total = 0;
+        dataParse.map((_) => {
+          total += _.price * _.quantity;
+        });
+        state.totalPrice = total;
       }
-      const dataParse = JSON.parse(localStorageCart as string) as CartItem[];
-      state.data = dataParse;
-      state.itemCount = dataParse.length;
-      let total = 0;
-      dataParse.map((_) => {
-        total += _.price * _.quantity;
-      });
-      state.totalPrice = total;
     })
     .addCase(addToCart, (state: CartType, action: any) => {
       const cartN = state.data || [];
