@@ -5,7 +5,7 @@ import  type { RootState } from "@/redux/store";
 import { update } from "./action";
 
 const exampleReducer = createReducer(defaultExampleReducer, (builder:any) => {
-  builder.addCase(update, (state:any, action: any) => {
+  builder.addCase(update, (state:any) => {
     state.value++
   });
 });
